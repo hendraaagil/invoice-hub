@@ -5,8 +5,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from '@mui/material/styles'
 
 import theme from '@/lib/theme'
-import { ModeSwitch } from '@/components/ui'
-import { SideMenu } from '@/components/layouts'
+import { SideMenu, TopBar } from '@/components/layouts'
 import { Box } from '@mui/material'
 
 export const metadata: Metadata = {
@@ -25,11 +24,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <ModeSwitch />
 
             <Box sx={{ display: 'flex' }}>
+              <TopBar />
               <SideMenu />
-              <Box sx={{ flexGrow: 1 }} component="main">
+              <Box sx={{ flexGrow: 1, mt: '64px' }} component="main">
                 {props.children}
               </Box>
             </Box>
