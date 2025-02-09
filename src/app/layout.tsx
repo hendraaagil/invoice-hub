@@ -6,6 +6,8 @@ import { ThemeProvider } from '@mui/material/styles'
 
 import theme from '@/lib/theme'
 import { ModeSwitch } from '@/components/ui'
+import { SideMenu } from '@/components/layouts'
+import { Box } from '@mui/material'
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +26,13 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <ModeSwitch />
-            {props.children}
+
+            <Box sx={{ display: 'flex' }}>
+              <SideMenu />
+              <Box sx={{ flexGrow: 1 }} component="main">
+                {props.children}
+              </Box>
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
