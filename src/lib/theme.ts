@@ -17,6 +17,9 @@ const theme = createTheme({
   typography: {
     fontFamily: fontSans.style.fontFamily,
   },
+  palette: {
+    background: { default: '#F1F5F9' },
+  },
 })
 
 export default theme
