@@ -1,23 +1,5 @@
-import NextLink from 'next/link'
-import { Box, Container, Link, Typography } from '@mui/material'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return (
-    <Container maxWidth="lg">
-      <Box
-        sx={{
-          my: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '80vh',
-        }}
-      >
-        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          Material UI - Next.js App Router
-        </Typography>
-      </Box>
-    </Container>
-  )
+  redirect('/list')
 }

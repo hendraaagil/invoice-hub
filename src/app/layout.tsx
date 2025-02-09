@@ -8,7 +8,10 @@ import theme from '@/lib/theme'
 import { ModeSwitch } from '@/components/ui'
 
 export const metadata: Metadata = {
-  title: 'InvoiceHub',
+  title: {
+    template: '%s - InvoiceHub',
+    default: 'InvoiceHub',
+  },
   description: 'Invoicing made simple.',
 }
 
