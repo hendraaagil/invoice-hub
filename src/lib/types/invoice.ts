@@ -5,7 +5,7 @@ export enum Status {
 }
 
 export type Invoice = {
-  number: string
+  id: string
   name: string
   amount: string
   dueDate: Date | null

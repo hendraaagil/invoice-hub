@@ -2,8 +2,8 @@ import { z } from 'zod'
 import { Status } from '../types/invoice'
 
 export const invoiceSchema = z.object({
+  id: z.string().nonempty('Number is required'),
   name: z.string().nonempty('Name is required'),
-  number: z.string().nonempty('Number is required'),
   amount: z.string().nonempty('Amount is required'),
   dueDate: z
     .date()

@@ -19,8 +19,8 @@ import { generateInvoiceNumber } from '@/utils/number'
 export function AddForm() {
   const form = useForm({
     defaultValues: {
+      id: generateInvoiceNumber(),
       name: '',
-      number: generateInvoiceNumber(),
       amount: '',
       dueDate: null,
       status: '' as Status,
@@ -56,7 +56,7 @@ export function AddForm() {
         </Grid>
         <Grid size={6}>
           <Controller
-            name="number"
+            name="id"
             control={form.control}
             render={({ field, fieldState: { error } }) => (
               <TextField
