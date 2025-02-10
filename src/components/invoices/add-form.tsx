@@ -10,18 +10,21 @@ import {
 } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { DatePicker } from '@mui/x-date-pickers'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Invoice, Status } from '@/lib/types/invoice'
+import { invoiceSchema } from '@/lib/schemas/invoice'
 
 export function AddForm() {
-  const form = useForm<Invoice>({
+  const form = useForm({
     defaultValues: {
       name: '',
       number: '',
       amount: '',
       dueDate: null,
-      status: '',
+      status: '' as Status,
     },
+    resolver: zodResolver(invoiceSchema),
   })
 
   const onSubmit: SubmitHandler<Invoice> = (data) => {
