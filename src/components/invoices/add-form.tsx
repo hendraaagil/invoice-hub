@@ -14,12 +14,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Invoice, Status } from '@/lib/types/invoice'
 import { invoiceSchema } from '@/lib/schemas/invoice'
+import { generateInvoiceNumber } from '@/utils/number'
 
 export function AddForm() {
   const form = useForm({
     defaultValues: {
       name: '',
-      number: '',
+      number: generateInvoiceNumber(),
       amount: '',
       dueDate: null,
       status: '' as Status,
@@ -67,6 +68,7 @@ export function AddForm() {
                 label="Number"
                 placeholder="Enter your invoice number"
                 helperText={error ? error.message : null}
+                slotProps={{ input: { readOnly: true } }}
               />
             )}
           />
