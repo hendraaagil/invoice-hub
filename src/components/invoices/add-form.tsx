@@ -15,8 +15,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Invoice, Status } from '@/lib/types/invoice'
 import { invoiceSchema } from '@/lib/schemas/invoice'
 import { generateInvoiceNumber } from '@/utils/number'
+import { useInvoiceStore } from '@/stores/invoice'
 
 export function AddForm() {
+  const { addInvoice } = useInvoiceStore((state) => state)
   const form = useForm({
     defaultValues: {
       id: generateInvoiceNumber(),
@@ -29,8 +31,11 @@ export function AddForm() {
   })
 
   const onSubmit: SubmitHandler<Invoice> = (data) => {
-    console.log(data)
+    addInvoice(data)
+    // TODO: Show success message
+
     form.reset()
+    form.setValue('id', generateInvoiceNumber())
   }
 
   return (
