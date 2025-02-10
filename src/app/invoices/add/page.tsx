@@ -13,7 +13,7 @@ export default function AddPage() {
         Add Invoice
       </Typography>
 
-      <Paper sx={{ py: '16px' }} elevation={16}>
+      <Paper sx={{ pt: '16px', pb: '24px' }} elevation={16}>
         <Typography fontWeight={700} sx={{ px: '24px' }}>
           Invoice Form
         </Typography>
