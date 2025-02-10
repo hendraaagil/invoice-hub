@@ -34,7 +34,7 @@ export function SideMenu() {
       anchor="left"
     >
       <Toolbar sx={{ padding: '24px' }}>
-        <Image alt="Logo" src="/logo.png" width={166} height={46} />
+        <Image alt="Logo" src="/logo.png" width={166} height={46} priority />
       </Toolbar>
       <Divider />
       <List>
