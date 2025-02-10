@@ -10,6 +10,8 @@ export function TopBar() {
       sx={{
         backgroundColor: (theme) =>
           theme.palette.mode === 'light' ? '#fff' : 'default',
+        boxShadow: (theme) =>
+          theme.palette.mode === 'light' ? 'none' : 'default',
       }}
     >
       <Toolbar sx={{ justifyContent: 'flex-end' }}>
