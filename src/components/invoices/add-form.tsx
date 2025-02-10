@@ -1,14 +1,32 @@
 'use client'
 
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { Button, Grid2 as Grid, TextField } from '@mui/material'
+import {
+  Button,
+  Grid2 as Grid,
+  InputAdornment,
+  MenuItem,
+  TextField,
+} from '@mui/material'
 import { Add } from '@mui/icons-material'
+import { DatePicker } from '@mui/x-date-pickers'
+
+import { Invoice, Status } from '@/lib/types/invoice'
 
 export function AddForm() {
-  const form = useForm({ defaultValues: { name: '', number: '' } })
+  const form = useForm<Invoice>({
+    defaultValues: {
+      name: '',
+      number: '',
+      amount: '',
+      dueDate: null,
+      status: '',
+    },
+  })
 
-  const onSubmit: SubmitHandler<Record<string, string>> = (data) => {
+  const onSubmit: SubmitHandler<Invoice> = (data) => {
     console.log(data)
+    form.reset()
   }
 
   return (
@@ -18,14 +36,16 @@ export function AddForm() {
           <Controller
             name="name"
             control={form.control}
-            render={({ field }) => (
+            render={({ field, fieldState: { error } }) => (
               <TextField
                 {...field}
+                error={!!error}
                 fullWidth
                 required
                 type="text"
                 label="Name"
                 placeholder="Enter your invoice name"
+                helperText={error ? error.message : null}
               />
             )}
           />
@@ -34,15 +54,91 @@ export function AddForm() {
           <Controller
             name="number"
             control={form.control}
-            render={({ field }) => (
+            render={({ field, fieldState: { error } }) => (
               <TextField
                 {...field}
+                error={!!error}
+                fullWidth
+                required
+                type="text"
+                label="Number"
+                placeholder="Enter your invoice number"
+                helperText={error ? error.message : null}
+              />
+            )}
+          />
+        </Grid>
+        <Grid size={6}>
+          <Controller
+            name="amount"
+            control={form.control}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                error={!!error}
                 fullWidth
                 required
                 type="number"
-                label="Number"
-                placeholder="Enter your invoice number"
+                label="Amount"
+                placeholder="Enter your invoice amount"
+                helperText={error ? error.message : null}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">Rp</InputAdornment>
+                    ),
+                  },
+                }}
               />
+            )}
+          />
+        </Grid>
+        <Grid size={6}>
+          <Controller
+            name="dueDate"
+            control={form.control}
+            rules={{ required: 'Due date is required' }}
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <DatePicker
+                  {...field}
+                  minDate={new Date()}
+                  sx={{ width: '100%' }}
+                  slotProps={{
+                    textField: {
+                      error: !!error,
+                      helperText: error ? error.message : null,
+                    },
+                  }}
+                  label="Due Date *"
+                  format="dd/MM/yyyy"
+                />
+              </>
+            )}
+          />
+        </Grid>
+        <Grid size={6}>
+          <Controller
+            name="status"
+            control={form.control}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                error={!!error}
+                fullWidth
+                required
+                select
+                label="Status"
+                helperText={error ? error.message : null}
+              >
+                {(Object.keys(Status) as Array<keyof typeof Status>).map(
+                  (status) => (
+                    <MenuItem key={status} value={Status[status]}>
+                      {status}
+                    </MenuItem>
+                  ),
+                )}
+              </TextField>
             )}
           />
         </Grid>
