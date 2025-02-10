@@ -1,12 +1,14 @@
 import { Metadata } from 'next'
+
 import CssBaseline from '@mui/material/CssBaseline'
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from '@mui/material/styles'
+import { Box } from '@mui/material'
 
 import theme from '@/lib/theme'
 import { SideMenu, TopBar } from '@/components/layouts'
-import { Box } from '@mui/material'
+import { LocaleProvider } from '@/components/providers'
 
 export const metadata: Metadata = {
   title: {
@@ -23,15 +25,16 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <InitColorSchemeScript attribute="class" />
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
-            <CssBaseline />
-
-            <Box sx={{ display: 'flex' }}>
-              <TopBar />
-              <SideMenu />
-              <Box sx={{ flexGrow: 1, mt: '64px' }} component="main">
-                {props.children}
+            <LocaleProvider>
+              <CssBaseline />
+              <Box sx={{ display: 'flex' }}>
+                <TopBar />
+                <SideMenu />
+                <Box sx={{ flexGrow: 1, mt: '64px' }} component="main">
+                  {props.children}
+                </Box>
               </Box>
-            </Box>
+            </LocaleProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
