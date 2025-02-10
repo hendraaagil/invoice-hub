@@ -5,9 +5,9 @@ export enum Status {
 }
 
 export type Invoice = {
-  name: string
   number: string
-  dueDate: string | null
+  name: string
   amount: string
-  status: Status | string
+  dueDate: Date | null
+  status: Status
 }
