@@ -3,14 +3,10 @@
 import { Search } from '@mui/icons-material'
 import { Box, InputAdornment, MenuItem, TextField } from '@mui/material'
 import { Status } from '@/lib/types/invoice'
-import { parseAsString, useQueryState } from 'nuqs'
+import { useInvoiceFilters } from '@/hooks/use-invoice-filters'
 
 export function Filter() {
-  const [query, setQuery] = useQueryState('q', parseAsString.withDefault(''))
-  const [status, setStatus] = useQueryState(
-    'status',
-    parseAsString.withDefault('all'),
-  )
+  const { query, setQuery, status, setStatus } = useInvoiceFilters()
 
   return (
     <Box display="flex" alignItems="center" gap={2}>
@@ -37,7 +33,6 @@ export function Filter() {
         value={status}
         onChange={(e) => setStatus(e.target.value)}
         select
-        placeholder="Status"
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === 'light' ? 'white' : 'grey.800',
@@ -45,9 +40,9 @@ export function Filter() {
         }}
       >
         <MenuItem value="all">All status</MenuItem>
-        {(Object.keys(Status) as Array<keyof typeof Status>).map((status) => (
-          <MenuItem key={status} value={Status[status]}>
-            {status}
+        {(Object.keys(Status) as Array<keyof typeof Status>).map((key) => (
+          <MenuItem key={key} value={Status[key]}>
+            {key}
           </MenuItem>
         ))}
       </TextField>
