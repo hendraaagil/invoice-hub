@@ -91,7 +91,7 @@ export function SideMenu() {
       <DrawerFooter>
         <IconButton
           onClick={handleDrawerToggle}
-          sx={{ width: '100%', borderRadius: 0 }}
+          sx={{ width: '100%', borderRadius: 0, color: 'inherit' }}
         >
           {open ? <ChevronLeft /> : <ChevronRight />}
         </IconButton>
