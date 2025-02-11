@@ -1,5 +1,5 @@
 import { Box, Container, Paper, Typography } from '@mui/material'
-import { Filter } from '@/components/invoices'
+import { Filter, List } from '@/components/invoices'
 
 export default function ListPage() {
   return (
@@ -16,7 +16,9 @@ export default function ListPage() {
         <Filter />
       </Box>
 
-      <Paper sx={{ pt: '16px', pb: '24px' }} elevation={16}></Paper>
+      <Paper sx={{ p: '16px' }} elevation={16}>
+        <List />
+      </Paper>
     </Container>
   )
 }
