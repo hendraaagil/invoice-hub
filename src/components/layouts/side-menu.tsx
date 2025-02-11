@@ -2,8 +2,14 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
-import { ListSharp, PostAdd } from '@mui/icons-material'
+import {
+  ListSharp,
+  PostAdd,
+  ChevronLeft,
+  ChevronRight,
+} from '@mui/icons-material'
 import {
   Divider,
   Drawer,
@@ -13,33 +19,63 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
+  IconButton,
 } from '@mui/material'
+import { styled } from '@mui/system'
 
 const drawerWidth = 280
+const closedWidth = 65
+
+const DrawerFooter = styled('div')({
+  position: 'fixed',
+  bottom: 0,
+  padding: '16px',
+  display: 'flex',
+  justifyContent: 'center',
+  width: 'inherit',
+  borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+  backgroundColor: '#1c2434',
+})
 
 export function SideMenu() {
+  const [open, setOpen] = useState(true)
+
+  const handleDrawerToggle = () => {
+    setOpen(!open)
+  }
+
   return (
     <Drawer
       sx={{
-        width: drawerWidth,
+        width: open ? drawerWidth : closedWidth,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: drawerWidth,
+          width: open ? drawerWidth : closedWidth,
           boxSizing: 'border-box',
           backgroundColor: '#1c2434',
           color: (theme) => theme.palette.common.white,
+          overflowX: 'hidden',
+          transition: (theme) =>
+            theme.transitions.create('width', {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.enteringScreen,
+            }),
         },
       }}
       variant="permanent"
       anchor="left"
     >
-      <Toolbar sx={{ padding: '24px' }}>
-        <Image alt="Logo" src="/logo.png" width={166} height={46} priority />
-      </Toolbar>
+      {open ? (
+        <Toolbar sx={{ padding: '24px' }}>
+          <Image alt="Logo" src="/logo.png" width={166} height={46} priority />
+        </Toolbar>
+      ) : (
+        <Toolbar />
+      )}
       <Divider />
-      <List>
+      <List sx={{ mb: '60px' }}>
         {['Add Invoice', 'My Invoices'].map((text, index) => (
-          <ListItem key={text}>
+          <ListItem key={text} disablePadding={!open}>
             <ListItemButton
               LinkComponent={Link}
               href={index === 0 ? '/invoices/add' : '/invoices/list'}
@@ -52,6 +88,14 @@ export function SideMenu() {
           </ListItem>
         ))}
       </List>
+      <DrawerFooter>
+        <IconButton
+          onClick={handleDrawerToggle}
+          sx={{ width: '100%', borderRadius: 0 }}
+        >
+          {open ? <ChevronLeft /> : <ChevronRight />}
+        </IconButton>
+      </DrawerFooter>
     </Drawer>
   )
 }
