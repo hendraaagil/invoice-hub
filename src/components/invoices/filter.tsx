@@ -19,7 +19,10 @@ export function Filter() {
         onChange={(e) => setQuery(e.target.value)}
         type="text"
         placeholder="Search invoice"
-        sx={{ backgroundColor: 'white' }}
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light' ? 'white' : 'grey.800',
+        }}
         slotProps={{
           input: {
             startAdornment: (
@@ -35,7 +38,11 @@ export function Filter() {
         onChange={(e) => setStatus(e.target.value)}
         select
         placeholder="Status"
-        sx={{ backgroundColor: 'white', minWidth: '7.5rem' }}
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light' ? 'white' : 'grey.800',
+          minWidth: '7.5rem',
+        }}
       >
         <MenuItem value="all">All status</MenuItem>
         {(Object.keys(Status) as Array<keyof typeof Status>).map((status) => (

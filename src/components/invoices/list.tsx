@@ -20,7 +20,12 @@ export function List() {
 
   return (
     <Table>
-      <TableHead sx={{ bgcolor: '#F7F9FC' }}>
+      <TableHead
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light' ? 'grey.100' : 'grey.800',
+        }}
+      >
         <TableRow>
           {['Invoice', 'Due Date', 'Status', 'Amount', 'Actions'].map(
             (header) => (
