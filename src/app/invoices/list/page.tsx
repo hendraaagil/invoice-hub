@@ -1,6 +1,11 @@
+import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { Box, Container, Paper, Typography } from '@mui/material'
 import { Filter, List } from '@/components/invoices'
+
+export const metadata: Metadata = {
+  title: 'My Invoices',
+}
 
 export default function ListPage() {
   return (

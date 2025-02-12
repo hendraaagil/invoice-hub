@@ -1,5 +1,10 @@
-import { AddForm } from '@/components/invoices'
+import { Metadata } from 'next'
 import { Container, Divider, Paper, Typography } from '@mui/material'
+import { AddForm } from '@/components/invoices'
+
+export const metadata: Metadata = {
+  title: 'Add Invoice',
+}
 
 export default function AddPage() {
   return (
