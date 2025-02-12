@@ -36,8 +36,6 @@ export function Form() {
 
   const onSubmit: SubmitHandler<Invoice> = (data) => {
     addInvoice(data)
-    // TODO: Show success message
-
     form.reset()
     form.setValue('id', generateInvoiceNumber())
   }
