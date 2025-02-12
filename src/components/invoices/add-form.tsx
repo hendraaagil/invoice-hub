@@ -41,7 +41,7 @@ export function AddForm() {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <Grid container columns={12} spacing={2} sx={{ px: '24px' }}>
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <Controller
             name="name"
             control={form.control}
@@ -59,7 +59,7 @@ export function AddForm() {
             )}
           />
         </Grid>
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <Controller
             name="id"
             control={form.control}
@@ -78,7 +78,7 @@ export function AddForm() {
             )}
           />
         </Grid>
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <Controller
             name="amount"
             control={form.control}
@@ -103,7 +103,7 @@ export function AddForm() {
             )}
           />
         </Grid>
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <Controller
             name="dueDate"
             control={form.control}
@@ -127,7 +127,7 @@ export function AddForm() {
             )}
           />
         </Grid>
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <Controller
             name="status"
             control={form.control}
