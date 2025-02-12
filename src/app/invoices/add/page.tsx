@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Container, Divider, Paper, Typography } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import { Form } from '@/components/invoices'
 
 export const metadata: Metadata = {
@@ -18,13 +18,7 @@ export default function AddPage() {
         Add Invoice
       </Typography>
 
-      <Paper sx={{ pt: '16px', pb: '24px' }} elevation={16}>
-        <Typography fontWeight={700} sx={{ px: '24px' }}>
-          Invoice Form
-        </Typography>
-        <Divider sx={{ my: '16px' }} />
-        <Form />
-      </Paper>
+      <Form />
     </Container>
   )
 }
