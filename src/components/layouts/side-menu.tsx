@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 import {
@@ -38,6 +39,7 @@ const DrawerFooter = styled('div')({
 })
 
 export function SideMenu() {
+  const pathname = usePathname()
   const [open, setOpen] = useState(true)
 
   const handleDrawerToggle = () => {
@@ -74,19 +76,29 @@ export function SideMenu() {
       )}
       <Divider />
       <List sx={{ mb: '60px' }}>
-        {['Add Invoice', 'My Invoices'].map((text, index) => (
-          <ListItem key={text} disablePadding={!open}>
-            <ListItemButton
-              LinkComponent={Link}
-              href={index === 0 ? '/invoices/add' : '/invoices/list'}
-            >
-              <ListItemIcon sx={{ color: 'inherit' }}>
-                {index === 0 ? <PostAdd /> : <ListSharp />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {['Add Invoice', 'My Invoices'].map((text, index) => {
+          const href = index === 0 ? '/invoices/add' : '/invoices/list'
+          const isActive = pathname === href
+
+          return (
+            <ListItem key={text} disablePadding={!open}>
+              <ListItemButton
+                LinkComponent={Link}
+                href={href}
+                sx={{
+                  backgroundColor: isActive
+                    ? 'rgba(255, 255, 255, 0.12)'
+                    : 'inherit',
+                }}
+              >
+                <ListItemIcon sx={{ color: 'inherit' }}>
+                  {index === 0 ? <PostAdd /> : <ListSharp />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          )
+        })}
       </List>
       <DrawerFooter>
         <IconButton
