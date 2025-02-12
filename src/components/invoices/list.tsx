@@ -121,7 +121,6 @@ export function List() {
                     : 'error'
               }
               label={invoice.status}
-              sx={{ textTransform: 'capitalize' }}
             />
           </TableCell>
           <TableCell>{formatCurrency(invoice.amount)}</TableCell>

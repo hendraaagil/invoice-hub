@@ -72,7 +72,6 @@ function ModalDelete({
                 onClose()
                 deleteInvoice(invoice.id)
               }}
-              disableElevation
             >
               Delete
             </Button>
@@ -106,20 +105,10 @@ export function Action({
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       >
         <Box p={1.5} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <Button
-            color="primary"
-            variant="contained"
-            sx={{ textTransform: 'capitalize' }}
-            disableElevation
-          >
+          <Button color="primary" variant="contained">
             Edit
           </Button>
-          <Button
-            color="error"
-            variant="outlined"
-            sx={{ textTransform: 'capitalize' }}
-            onClick={handleOpen}
-          >
+          <Button color="error" variant="outlined" onClick={handleOpen}>
             Delete
           </Button>
         </Box>

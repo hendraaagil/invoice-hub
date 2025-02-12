@@ -158,8 +158,7 @@ export function Form() {
             type="submit"
             variant="contained"
             startIcon={<Add />}
-            sx={{ textTransform: 'capitalize', py: '12px' }}
-            disableElevation
+            sx={{ py: '12px' }}
             fullWidth
           >
             Add Invoice
