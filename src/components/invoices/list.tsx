@@ -123,7 +123,7 @@ export function List() {
               label={invoice.status}
             />
           </TableCell>
-          <TableCell>{formatCurrency(invoice.amount)}</TableCell>
+          <TableCell>{formatCurrency(invoice.amount, true)}</TableCell>
           <TableCell>
             <IconButton
               aria-label="Actions"
