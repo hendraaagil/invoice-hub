@@ -5,13 +5,13 @@ import { Menu } from '@mui/icons-material'
 import {
   Chip,
   IconButton,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Typography,
-  Skeleton,
 } from '@mui/material'
 
 import { Action } from './action'
