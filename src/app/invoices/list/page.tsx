@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Box, Container, Paper, Typography } from '@mui/material'
 import { Filter, List } from '@/components/invoices'
 
@@ -13,11 +14,15 @@ export default function ListPage() {
         <Typography variant="h4" fontWeight={700}>
           My Invoice
         </Typography>
-        <Filter />
+        <Suspense>
+          <Filter />
+        </Suspense>
       </Box>
 
       <Paper sx={{ p: '16px' }} elevation={16}>
-        <List />
+        <Suspense>
+          <List />
+        </Suspense>
       </Paper>
     </Container>
   )
