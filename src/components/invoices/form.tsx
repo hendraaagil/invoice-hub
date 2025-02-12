@@ -17,7 +17,7 @@ import { invoiceSchema } from '@/lib/schemas/invoice'
 import { generateInvoiceNumber } from '@/utils/number'
 import { useInvoiceStore } from '@/stores/invoice'
 
-export function AddForm() {
+export function Form() {
   const { addInvoice } = useInvoiceStore((state) => state)
   const form = useForm({
     defaultValues: {

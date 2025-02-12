@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { Container, Divider, Paper, Typography } from '@mui/material'
-import { AddForm } from '@/components/invoices'
+import { Form } from '@/components/invoices'
 
 export const metadata: Metadata = {
   title: 'Add Invoice',
@@ -23,7 +23,7 @@ export default function AddPage() {
           Invoice Form
         </Typography>
         <Divider sx={{ my: '16px' }} />
-        <AddForm />
+        <Form />
       </Paper>
     </Container>
   )
