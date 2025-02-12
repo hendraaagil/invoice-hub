@@ -12,9 +12,14 @@ import {
   PopoverProps,
   Typography,
 } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Invoice } from '@/lib/types/invoice'
 import { useInvoiceStore } from '@/stores/invoice'
+
+const BackdropBlur = styled(Backdrop)(() => ({
+  backdropFilter: 'blur(4px)',
+}))
 
 function ModalDelete({
   open,
@@ -33,12 +38,8 @@ function ModalDelete({
       open={open}
       onClose={onClose}
       closeAfterTransition
-      slots={{ backdrop: Backdrop }}
-      slotProps={{
-        backdrop: {
-          timeout: 500,
-        },
-      }}
+      slots={{ backdrop: BackdropBlur }}
+      slotProps={{ backdrop: { timeout: 500 } }}
     >
       <Fade in={open}>
         <Box
