@@ -189,17 +189,27 @@ export function Form() {
 
       {form.formState.isSubmitted && (
         <Alert
-          severity="success"
+          severity={form.formState.isSubmitSuccessful ? 'success' : 'error'}
           sx={{
             mt: '32px',
-            borderLeft: (theme) => `4px solid ${theme.palette.success.main}`,
+            borderLeft: (theme) =>
+              `4px solid ${
+                theme.palette[
+                  form.formState.isSubmitSuccessful ? 'success' : 'error'
+                ].main
+              }`,
           }}
           elevation={8}
         >
-          <Typography fontWeight={600}>Invoice added successfully!</Typography>
+          <Typography fontWeight={600}>
+            {form.formState.isSubmitSuccessful
+              ? 'Invoice added successfully!'
+              : 'Failed to add invoice!'}
+          </Typography>
           <Typography>
-            You can view and manage your invoice in the &apos;My Invoices&apos;
-            section.
+            {form.formState.isSubmitSuccessful
+              ? "You can view and manage your invoice in the 'My Invoices' section."
+              : 'Please check the form and try again.'}
           </Typography>
         </Alert>
       )}
