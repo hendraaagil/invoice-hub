@@ -1,5 +1,6 @@
 'use client'
 
+import { NumberFormatBase as NumberFormat } from 'react-number-format'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import {
   Alert,
@@ -17,9 +18,11 @@ import { DatePicker } from '@mui/x-date-pickers'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Invoice, Status } from '@/lib/types/invoice'
+import { maxAmount } from '@/constants'
 import { invoiceSchema } from '@/lib/schemas/invoice'
 import { generateInvoiceNumber } from '@/utils/number'
 import { useInvoiceStore } from '@/stores/invoice'
+import { formatCurrency } from '@/utils/format'
 
 export function Form() {
   const { addInvoice } = useInvoiceStore((state) => state)
@@ -28,6 +31,7 @@ export function Form() {
       id: generateInvoiceNumber(),
       name: '',
       amount: '',
+      formattedAmount: '',
       dueDate: null,
       status: '' as Status,
     },
@@ -88,15 +92,22 @@ export function Form() {
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <Controller
-                name="amount"
+                name="formattedAmount"
                 control={form.control}
                 render={({ field, fieldState: { error } }) => (
-                  <TextField
+                  <NumberFormat
                     {...field}
+                    customInput={TextField}
+                    format={formatCurrency}
+                    onValueChange={({ value }) => {
+                      form.setValue('amount', value)
+                    }}
+                    isAllowed={({ value }) =>
+                      parseInt(value) > 0 && parseInt(value) < maxAmount
+                    }
                     error={!!error}
                     fullWidth
                     required
-                    type="number"
                     label="Amount"
                     placeholder="Enter your invoice amount"
                     helperText={error ? error.message : null}

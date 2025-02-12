@@ -25,7 +25,7 @@ export function useFilteredInvoices(
       })
       setFilteredInvoices(filtered)
       setIsLoading(false)
-    }, 300)
+    }, 300) // Fake delay
 
     return () => clearTimeout(timer)
   }, [query, status, invoices])
