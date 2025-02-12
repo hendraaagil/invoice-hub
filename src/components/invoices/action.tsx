@@ -21,67 +21,60 @@ const BackdropBlur = styled(Backdrop)(() => ({
   backdropFilter: 'blur(4px)',
 }))
 
-function ModalDelete({
+const ModalDelete = ({
   open,
   onClose,
-  invoice,
+  onDelete,
 }: {
   onClose: () => void
-  invoice: Invoice
-} & Omit<ModalProps, 'children'>) {
-  const deleteInvoice = useInvoiceStore((state) => state.deleteInvoice)
-
-  return (
-    <Modal
-      aria-labelledby="modal-delete-title"
-      aria-describedby="modal-delete-description"
-      open={open}
-      onClose={onClose}
-      closeAfterTransition
-      slots={{ backdrop: BackdropBlur }}
-      slotProps={{ backdrop: { timeout: 500 } }}
-    >
-      <Fade in={open}>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            bgcolor: 'background.paper',
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 2,
-          }}
-        >
-          <Typography id="modal-delete-title" variant="h6" component="h2">
-            Are you sure?
-          </Typography>
-          <Typography id="modal-delete-description" sx={{ mt: 2 }}>
-            This action cannot be undone
-          </Typography>
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant="outlined" color="primary" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="error"
-              sx={{ ml: 2 }}
-              onClick={() => {
-                onClose()
-                deleteInvoice(invoice.id)
-              }}
-            >
-              Delete
-            </Button>
-          </Box>
+  onDelete: () => void
+} & Omit<ModalProps, 'children'>) => (
+  <Modal
+    aria-labelledby="modal-delete-title"
+    aria-describedby="modal-delete-description"
+    open={open}
+    onClose={onClose}
+    closeAfterTransition
+    slots={{ backdrop: BackdropBlur }}
+    slotProps={{ backdrop: { timeout: 500 } }}
+  >
+    <Fade in={open}>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 400,
+          bgcolor: 'background.paper',
+          boxShadow: 24,
+          p: 4,
+          borderRadius: 2,
+        }}
+      >
+        <Typography id="modal-delete-title" variant="h6" component="h2">
+          Are you sure?
+        </Typography>
+        <Typography id="modal-delete-description" sx={{ mt: 2 }}>
+          This action cannot be undone
+        </Typography>
+        <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
+          <Button variant="outlined" color="primary" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{ ml: 2 }}
+            onClick={onDelete}
+          >
+            Delete
+          </Button>
         </Box>
-      </Fade>
-    </Modal>
-  )
-}
+      </Box>
+    </Fade>
+  </Modal>
+)
 
 export function Action({
   invoice,
@@ -90,6 +83,8 @@ export function Action({
   invoice: Invoice
 } & PopoverProps) {
   const [open, setOpen] = useState(false)
+  const deleteInvoice = useInvoiceStore((state) => state.deleteInvoice)
+
   const handleOpen = () => {
     setOpen(true)
   }
@@ -97,10 +92,17 @@ export function Action({
     props.onClose?.({}, 'backdropClick')
     setOpen(false)
   }
+  const handleDelete = () => {
+    deleteInvoice(invoice.id)
+    handleClose()
+    setTimeout(() => {
+      alert('Invoice successfully deleted!')
+    }, 100)
+  }
 
   return (
     <>
-      <ModalDelete open={open} onClose={handleClose} invoice={invoice} />
+      <ModalDelete open={open} onClose={handleClose} onDelete={handleDelete} />
       <Popover
         {...props}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
