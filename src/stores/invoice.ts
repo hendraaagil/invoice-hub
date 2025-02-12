@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { storageKey } from '@/constants'
 import { Invoice } from '@/lib/types/invoice'
 
 interface InvoiceState {
@@ -26,8 +27,6 @@ export const useInvoiceStore = create<InvoiceState>()(
           invoices: state.invoices.filter((invoice) => invoice.id !== id),
         })),
     }),
-    {
-      name: 'invoice-storage',
-    },
+    { name: storageKey },
   ),
 )
